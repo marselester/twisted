@@ -277,6 +277,9 @@ SUrCyZXsNh6VXwjs3gKQ
         # key with no key data
         self.assertRaises(keys.BadKeyError, keys.Key.fromString,
                 '-----BEGIN RSA KEY-----\nwA==\n')
+        # private RSA key with no key data
+        self.assertRaises(keys.BadKeyError, keys.Key.fromString,
+                '-----BEGIN RSA PRIVATE KEY-----\n')
         # public RSA key with newlines
         self.assertRaises(
             keys.BadKeyError, keys.Key.fromString,

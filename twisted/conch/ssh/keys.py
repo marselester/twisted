@@ -218,7 +218,8 @@ class Key(object):
         """
         lines = data.strip().split('\n')
         kind = lines[0][11:14]
-        if lines[1].startswith('Proc-Type: 4,ENCRYPTED'):  # encrypted key
+        # encrypted key
+        if len(lines) > 1 and lines[1].startswith('Proc-Type: 4,ENCRYPTED'):
             if not passphrase:
                 raise EncryptedKeyError('Passphrase must be provided '
                                         'for an encrypted key')
