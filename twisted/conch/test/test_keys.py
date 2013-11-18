@@ -277,6 +277,13 @@ SUrCyZXsNh6VXwjs3gKQ
         # key with no key data
         self.assertRaises(keys.BadKeyError, keys.Key.fromString,
                 '-----BEGIN RSA KEY-----\nwA==\n')
+        # public RSA key with newlines
+        self.assertRaises(
+            keys.BadKeyError, keys.Key.fromString,
+            """ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAGEArzJx8OYOnJmzf4tfBE
+vLi8DVPrJ3/c9k2I/Az64fxjHf9imyRJbixtQhlH9lfNjUIx+4LmrJH
+5QNRsFporcHDKOTwTTYLh5KmRpslkYHRivcJSkbh/C+BR3utDS555mV comment
+""")
         # key with invalid DEK Info
         self.assertRaises(
             keys.BadKeyError, keys.Key.fromString,

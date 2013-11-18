@@ -12,6 +12,7 @@ Maintainer: U{Paul Swartz}
 import base64
 import itertools
 from hashlib import md5, sha1
+import binascii
 
 # external library imports
 from Crypto.Cipher import DES3, AES
@@ -179,7 +180,10 @@ class Key(object):
         @return: A {Crypto.PublicKey.pubkey.pubkey} object
         @raises BadKeyError: if the blob type is unknown.
         """
-        blob = base64.decodestring(data.split()[1])
+        try:
+            blob = base64.decodestring(data.split()[1])
+        except binascii.Error:
+            raise BadKeyError('Invalid base64-encoded public key blob')
         return Class._fromString_BLOB(blob)
     _fromString_PUBLIC_OPENSSH = classmethod(_fromString_PUBLIC_OPENSSH)
 
